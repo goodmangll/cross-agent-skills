@@ -382,6 +382,40 @@ npm run test:cross
    npm publish
    ```
 
+### Skill Maintenance
+
+Skills are the core content and need regular maintenance.
+
+**Update a skill:**
+```bash
+# Patch version (bug fixes)
+./scripts/update-skill.sh skill-name patch "Fix broken link"
+
+# Minor version (new features)
+./scripts/update-skill.sh skill-name minor "Add new examples"
+
+# Major version (breaking changes)
+./scripts/update-skill.sh skill-name major "Change skill behavior"
+```
+
+**Skill maintenance includes:**
+- Version tracking (in SKILL.md frontmatter)
+- Automated testing
+- Release notes updates
+- Git branch creation
+- PR creation
+
+**Skill update workflow:**
+1. Identify need for update
+2. Create update branch
+3. Make changes
+4. Test changes
+5. Update documentation
+6. Create PR
+7. Review and merge
+
+**For detailed guide:** See [docs/skill-maintenance.md](docs/skill-maintenance.md)
+
 ### Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
