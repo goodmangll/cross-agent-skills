@@ -43,11 +43,33 @@ description: Use when creating skill repositories that work across multiple AI c
    └── Version management
 ```
 
+## Quick Start
+
+**Fastest way to create a cross-platform skill repository:**
+
+```bash
+# Clone this repository
+git clone https://github.com/goodmangll/cross-agent-skills.git
+cd cross-agent-skills
+
+# Initialize new repository
+./templates/init-repo.sh my-new-skills "My cross-platform skills"
+
+# Follow the instructions output by the script
+```
+
+**Or manually:**
+
+1. Create directory structure
+2. Copy templates from `templates/` directory
+3. Customize for your needs
+
 ## Quick Reference
 
 | Component | Location | Purpose |
 |-----------|----------|---------|
 | Skills | `skills/*/SKILL.md` | Platform-agnostic instructions |
+| Templates | `templates/` | Ready-to-use scripts and configs |
 | Pi adapter | `.pi/extensions/*.ts` | Pi extension API integration |
 | Claude adapter | `.claude-plugin/plugin.json` | Claude plugin marketplace |
 | Codex adapter | `.codex-plugin/plugin.json` | Codex plugin system |
