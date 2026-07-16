@@ -32,40 +32,125 @@ cross-agent-skills/
 
 ### Pi
 
+**Prerequisites:**
+- Pi coding agent installed (`npm install -g @earendil-works/pi-coding-agent`)
+- API key configured (Anthropic, OpenAI, etc.)
+
+**Installation:**
+
 ```bash
-# Install from GitHub
+# Install from GitHub (recommended)
 pi install git:github.com/goodmangll/cross-agent-skills
 
 # Or install from npm (when published)
 pi install npm:cross-agent-skills
+
+# Or install locally for testing
+pi install /path/to/cross-agent-skills
+```
+
+**Verify installation:**
+```bash
+pi list  # Should show cross-agent-skills
+pi "Use the cross-agent-skills skill"  # Test skill loading
+```
+
+**Uninstall:**
+```bash
+pi remove git:github.com/goodmangll/cross-agent-skills
 ```
 
 ### Claude Code
 
-```bash
-# Install from marketplace (when available)
-/plugin install cross-agent-skills@your-marketplace
+**Prerequisites:**
+- Claude Code installed and configured
+- Plugin marketplace access (if using marketplace)
 
-# Or install from GitHub
+**Installation:**
+
+```bash
+# Install from official marketplace (when available)
+/plugin install cross-agent-skills@claude-plugins-official
+
+# Or install from custom marketplace
+/plugin marketplace add goodmangll/cross-agent-skills-marketplace
+/plugin install cross-agent-skills@cross-agent-skills-marketplace
+
+# Or install directly from GitHub
 /plugin install cross-agent-skills@github:goodmangll/cross-agent-skills
+```
+
+**Verify installation:**
+```bash
+# In Claude Code, ask:
+"List available skills"
+# Should show cross-agent-skills
+```
+
+**Uninstall:**
+```bash
+/plugin uninstall cross-agent-skills
 ```
 
 ### Codex
 
-```bash
-# Install from plugin search
-/plugins
-# Search for "cross-agent-skills" and install
+**Prerequisites:**
+- Codex CLI or Codex App installed
+- Plugin system enabled
 
-# Or install from GitHub
+**Installation:**
+
+```bash
+# Open plugin search
+/plugins
+
+# Search for "cross-agent-skills" and select Install Plugin
+
+# Or install directly from GitHub
 /plugins install https://github.com/goodmangll/cross-agent-skills
+```
+
+**Verify installation:**
+```bash
+# In Codex, ask:
+"Show installed plugins"
+# Should show cross-agent-skills
+```
+
+**Uninstall:**
+```bash
+/plugins uninstall cross-agent-skills
 ```
 
 ### Cursor
 
+**Prerequisites:**
+- Cursor installed with Agent mode enabled
+- Plugin marketplace access
+
+**Installation:**
+
 ```bash
-# Install from marketplace
+# Open Cursor Agent chat
 /add-plugin cross-agent-skills
+
+# Or search in plugin marketplace:
+# 1. Open Cursor Settings
+# 2. Go to Plugins
+# 3. Search for "cross-agent-skills"
+# 4. Click Install
+```
+
+**Verify installation:**
+```bash
+# In Cursor Agent, ask:
+"List available skills"
+# Should show cross-agent-skills
+```
+
+**Uninstall:**
+```bash
+/remove-plugin cross-agent-skills
 ```
 
 ## Usage
