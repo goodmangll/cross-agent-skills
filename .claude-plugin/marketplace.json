@@ -1,0 +1,13 @@
+{
+  "name": "cross-agent-skills",
+  "description": "Portable skill authoring guidance for AI coding agents",
+  "owner": {
+    "name": "goodmangll"
+  },
+  "plugins": [
+    {
+      "name": "cross-agent-skills",
+      "source": "./"
+    }
+  ]
+}
