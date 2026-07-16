@@ -312,7 +312,79 @@ export PATH=~/.npm-global/bin:$PATH
 
 For more issues, check [GitHub Issues](https://github.com/goodmangll/cross-agent-skills/issues).
 
-## Contributing
+## Maintenance
+
+### Version Management
+
+This project uses automated version management to keep all platform adapters in sync.
+
+**Check version sync:**
+```bash
+./scripts/bump-version.sh --check
+# or
+npm run version:check
+```
+
+**Update versions:**
+```bash
+./scripts/bump-version.sh 1.1.0
+```
+
+**Audit for missed files:**
+```bash
+./scripts/bump-version.sh --audit
+# or
+npm run version:audit
+```
+
+### Testing
+
+Run the complete test suite to verify cross-platform compatibility:
+
+```bash
+# Run all tests
+npm test
+# or
+./scripts/run-tests.sh
+
+# Run specific platform tests
+npm run test:pi
+npm run test:claude
+npm run test:codex
+npm run test:cursor
+npm run test:cross
+```
+
+### Release Process
+
+1. **Update version** in all platform adapters:
+   ```bash
+   ./scripts/bump-version.sh X.Y.Z
+   ```
+
+2. **Update RELEASE-NOTES.md** with changes
+
+3. **Run full test suite**:
+   ```bash
+   npm test
+   ```
+
+4. **Create PR** to `dev` branch
+
+5. **After review and merge**, tag the release:
+   ```bash
+   git tag vX.Y.Z
+   git push origin vX.Y.Z
+   ```
+
+6. **Publish to npm** (when ready):
+   ```bash
+   npm publish
+   ```
+
+### Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
