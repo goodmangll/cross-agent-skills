@@ -312,7 +312,113 @@ export PATH=~/.npm-global/bin:$PATH
 
 For more issues, check [GitHub Issues](https://github.com/goodmangll/cross-agent-skills/issues).
 
-## Contributing
+## Maintenance
+
+### Version Management
+
+This project uses automated version management to keep all platform adapters in sync.
+
+**Check version sync:**
+```bash
+./scripts/bump-version.sh --check
+# or
+npm run version:check
+```
+
+**Update versions:**
+```bash
+./scripts/bump-version.sh 1.1.0
+```
+
+**Audit for missed files:**
+```bash
+./scripts/bump-version.sh --audit
+# or
+npm run version:audit
+```
+
+### Testing
+
+Run the complete test suite to verify cross-platform compatibility:
+
+```bash
+# Run all tests
+npm test
+# or
+./scripts/run-tests.sh
+
+# Run specific platform tests
+npm run test:pi
+npm run test:claude
+npm run test:codex
+npm run test:cursor
+npm run test:cross
+```
+
+### Release Process
+
+1. **Update version** in all platform adapters:
+   ```bash
+   ./scripts/bump-version.sh X.Y.Z
+   ```
+
+2. **Update RELEASE-NOTES.md** with changes
+
+3. **Run full test suite**:
+   ```bash
+   npm test
+   ```
+
+4. **Create PR** to `dev` branch
+
+5. **After review and merge**, tag the release:
+   ```bash
+   git tag vX.Y.Z
+   git push origin vX.Y.Z
+   ```
+
+6. **Publish to npm** (when ready):
+   ```bash
+   npm publish
+   ```
+
+### Skill Maintenance
+
+Skills are the core content and need regular maintenance.
+
+**Update a skill:**
+```bash
+# Patch version (bug fixes)
+./scripts/update-skill.sh skill-name patch "Fix broken link"
+
+# Minor version (new features)
+./scripts/update-skill.sh skill-name minor "Add new examples"
+
+# Major version (breaking changes)
+./scripts/update-skill.sh skill-name major "Change skill behavior"
+```
+
+**Skill maintenance includes:**
+- Version tracking (in SKILL.md frontmatter)
+- Automated testing
+- Release notes updates
+- Git branch creation
+- PR creation
+
+**Skill update workflow:**
+1. Identify need for update
+2. Create update branch
+3. Make changes
+4. Test changes
+5. Update documentation
+6. Create PR
+7. Review and merge
+
+**For detailed guide:** See [docs/skill-maintenance.md](docs/skill-maintenance.md)
+
+### Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
