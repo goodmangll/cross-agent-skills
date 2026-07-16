@@ -1,0 +1,19 @@
+{
+  "name": "cross-agent-skills",
+  "description": "Example cross-platform skills collection demonstrating platform-agnostic skill design",
+  "version": "1.0.0",
+  "author": {
+    "name": "Cross-Agent Skills Example",
+    "email": "example@cross-agent-skills.dev"
+  },
+  "homepage": "https://github.com/example/cross-agent-skills",
+  "repository": "https://github.com/example/cross-agent-skills",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "cross-platform",
+    "multi-agent",
+    "example"
+  ],
+  "skills": "../../skills/"
+}

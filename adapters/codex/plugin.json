@@ -1,0 +1,43 @@
+{
+  "name": "cross-agent-skills",
+  "version": "1.0.0",
+  "description": "Example cross-platform skills demonstrating platform-agnostic skill design",
+  "author": {
+    "name": "Cross-Agent Skills Example",
+    "url": "https://github.com/example/cross-agent-skills"
+  },
+  "homepage": "https://github.com/example/cross-agent-skills",
+  "repository": "https://github.com/example/cross-agent-skills",
+  "license": "MIT",
+  "keywords": [
+    "cross-platform",
+    "skills",
+    "multi-agent",
+    "example"
+  ],
+  "skills": "../../skills/",
+  "hooks": {},
+  "interface": {
+    "displayName": "Cross-Agent Skills",
+    "shortDescription": "Example cross-platform skills collection",
+    "longDescription": "Demonstrates how to create skills that work across multiple AI coding agents",
+    "developerName": "Cross-Agent Skills Example",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Show me how cross-platform skills work",
+      "Help me create skills for multiple agents"
+    ],
+    "websiteURL": "https://github.com/example/cross-agent-skills",
+    "privacyPolicyURL": "https://github.com/example/cross-agent-skills/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/example/cross-agent-skills/blob/main/TERMS.md",
+    "brandColor": "#3B82F6",
+    "composerIcon": "./assets/icon.svg",
+    "logo": "./assets/logo.png",
+    "screenshots": []
+  }
+}

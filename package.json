@@ -1,0 +1,37 @@
+{
+  "name": "cross-agent-skills",
+  "version": "1.0.0",
+  "description": "Cross-platform skills that work across multiple AI coding agents (Pi, Claude Code, Codex, Cursor)",
+  "keywords": [
+    "pi-package",
+    "claude-plugin",
+    "codex-plugin",
+    "cursor-plugin",
+    "cross-platform",
+    "skills",
+    "multi-agent",
+    "ai-tools",
+    "coding-agent"
+  ],
+  "author": "goodmangll",
+  "license": "MIT",
+  "homepage": "https://github.com/goodmangll/cross-agent-skills",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/goodmangll/cross-agent-skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/goodmangll/cross-agent-skills/issues"
+  },
+  "pi": {
+    "extensions": ["adapters/pi/extensions"],
+    "skills": ["skills"]
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "echo \"Error: no lint specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
