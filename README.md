@@ -32,40 +32,125 @@ cross-agent-skills/
 
 ### Pi
 
+**Prerequisites:**
+- Pi coding agent installed (`npm install -g @earendil-works/pi-coding-agent`)
+- API key configured (Anthropic, OpenAI, etc.)
+
+**Installation:**
+
 ```bash
-# Install from GitHub
+# Install from GitHub (recommended)
 pi install git:github.com/goodmangll/cross-agent-skills
 
 # Or install from npm (when published)
 pi install npm:cross-agent-skills
+
+# Or install locally for testing
+pi install /path/to/cross-agent-skills
+```
+
+**Verify installation:**
+```bash
+pi list  # Should show cross-agent-skills
+pi "Use the cross-agent-skills skill"  # Test skill loading
+```
+
+**Uninstall:**
+```bash
+pi remove git:github.com/goodmangll/cross-agent-skills
 ```
 
 ### Claude Code
 
-```bash
-# Install from marketplace (when available)
-/plugin install cross-agent-skills@your-marketplace
+**Prerequisites:**
+- Claude Code installed and configured
+- Plugin marketplace access (if using marketplace)
 
-# Or install from GitHub
+**Installation:**
+
+```bash
+# Install from official marketplace (when available)
+/plugin install cross-agent-skills@claude-plugins-official
+
+# Or install from custom marketplace
+/plugin marketplace add goodmangll/cross-agent-skills-marketplace
+/plugin install cross-agent-skills@cross-agent-skills-marketplace
+
+# Or install directly from GitHub
 /plugin install cross-agent-skills@github:goodmangll/cross-agent-skills
+```
+
+**Verify installation:**
+```bash
+# In Claude Code, ask:
+"List available skills"
+# Should show cross-agent-skills
+```
+
+**Uninstall:**
+```bash
+/plugin uninstall cross-agent-skills
 ```
 
 ### Codex
 
-```bash
-# Install from plugin search
-/plugins
-# Search for "cross-agent-skills" and install
+**Prerequisites:**
+- Codex CLI or Codex App installed
+- Plugin system enabled
 
-# Or install from GitHub
+**Installation:**
+
+```bash
+# Open plugin search
+/plugins
+
+# Search for "cross-agent-skills" and select Install Plugin
+
+# Or install directly from GitHub
 /plugins install https://github.com/goodmangll/cross-agent-skills
+```
+
+**Verify installation:**
+```bash
+# In Codex, ask:
+"Show installed plugins"
+# Should show cross-agent-skills
+```
+
+**Uninstall:**
+```bash
+/plugins uninstall cross-agent-skills
 ```
 
 ### Cursor
 
+**Prerequisites:**
+- Cursor installed with Agent mode enabled
+- Plugin marketplace access
+
+**Installation:**
+
 ```bash
-# Install from marketplace
+# Open Cursor Agent chat
 /add-plugin cross-agent-skills
+
+# Or search in plugin marketplace:
+# 1. Open Cursor Settings
+# 2. Go to Plugins
+# 3. Search for "cross-agent-skills"
+# 4. Click Install
+```
+
+**Verify installation:**
+```bash
+# In Cursor Agent, ask:
+"List available skills"
+# Should show cross-agent-skills
+```
+
+**Uninstall:**
+```bash
+/remove-plugin cross-agent-skills
 ```
 
 ## Usage
@@ -145,6 +230,87 @@ Different platforms use different tool names. Adapters handle the mapping:
 | `execute` | `bash` | `Bash` | `execute_command` | `run_command` |
 | `search` | `grep` | `Grep` | `search_files` | `search_files` |
 | `find` | `find` | `Glob` | `find_files` | `find_files` |
+
+## Troubleshooting
+
+### Pi
+
+**Problem:** Skills not loading after installation
+```bash
+# Solution: Check if package is installed
+pi list
+
+# Solution: Reload skills
+pi /reload
+
+# Solution: Check adapter logs
+pi --verbose
+```
+
+**Problem:** "Command not found" errors
+```bash
+# Solution: Verify Pi installation
+pi --version
+
+# Solution: Reinstall Pi
+npm install -g @earendil-works/pi-coding-agent
+```
+
+### Claude Code
+
+**Problem:** Plugin not appearing in marketplace
+```bash
+# Solution: Refresh marketplace
+/plugin marketplace refresh
+
+# Solution: Check plugin status
+/plugin list
+```
+
+**Problem:** Skills not recognized
+```bash
+# Solution: Restart Claude Code
+# Solution: Check plugin permissions
+/plugin permissions
+```
+
+### Codex
+
+**Problem:** Plugin installation fails
+```bash
+# Solution: Check Codex version
+codex --version
+
+# Solution: Enable plugin system
+/plugins enable
+```
+
+### Cursor
+
+**Problem:** Plugin not loading
+```bash
+# Solution: Restart Cursor
+# Solution: Check Agent mode is enabled
+# Solution: Clear plugin cache
+```
+
+### General Issues
+
+**Problem:** Skills work on one platform but not another
+1. Check adapter configuration in `adapters/` directory
+2. Verify tool mapping matches platform tools
+3. Test with minimal skill example
+4. Check platform-specific documentation
+
+**Problem:** Installation fails with permission errors
+```bash
+# Solution: Use sudo (not recommended)
+# Better solution: Fix npm permissions
+npm config set prefix ~/.npm-global
+export PATH=~/.npm-global/bin:$PATH
+```
+
+For more issues, check [GitHub Issues](https://github.com/goodmangll/cross-agent-skills/issues).
 
 ## Contributing
 
