@@ -28,8 +28,10 @@
     "skills": ["skills"]
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "echo \"Error: no lint specified\" && exit 1"
+    "test": "node tests/cross-platform-test.js",
+    "test:pi": "pi -e .",
+    "lint": "echo \"No lint configured\" && exit 0",
+    "validate": "npm test && npm run lint"
   },
   "engines": {
     "node": ">=18.0.0"
