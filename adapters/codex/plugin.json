@@ -1,40 +1,49 @@
 {
   "name": "cross-agent-skills",
+  "displayName": "Cross-Agent Skills",
+  "description": "Cross-platform skills that work across multiple AI coding agents",
   "version": "1.0.0",
-  "description": "Example cross-platform skills demonstrating platform-agnostic skill design",
   "author": {
-    "name": "Cross-Agent Skills Example",
-    "url": "https://github.com/example/cross-agent-skills"
+    "name": "goodmangll",
+    "url": "https://github.com/goodmangll"
   },
-  "homepage": "https://github.com/example/cross-agent-skills",
-  "repository": "https://github.com/example/cross-agent-skills",
+  "homepage": "https://github.com/goodmangll/cross-agent-skills",
+  "repository": "https://github.com/goodmangll/cross-agent-skills",
+  "bugs": {
+    "url": "https://github.com/goodmangll/cross-agent-skills/issues"
+  },
   "license": "MIT",
   "keywords": [
-    "cross-platform",
     "skills",
+    "cross-platform",
     "multi-agent",
-    "example"
+    "pi",
+    "claude",
+    "cursor",
+    "ai-tools",
+    "coding-agent"
   ],
   "skills": "../../skills/",
   "hooks": {},
   "interface": {
     "displayName": "Cross-Agent Skills",
-    "shortDescription": "Example cross-platform skills collection",
-    "longDescription": "Demonstrates how to create skills that work across multiple AI coding agents",
-    "developerName": "Cross-Agent Skills Example",
+    "shortDescription": "Cross-platform skills for multiple AI coding agents",
+    "longDescription": "Skills that work across Pi, Claude Code, Codex, Cursor, and more. Write once, use everywhere.",
+    "developerName": "goodmangll",
     "category": "Developer Tools",
     "capabilities": [
       "Interactive",
       "Read",
-      "Write"
+      "Write",
+      "Search"
     ],
     "defaultPrompt": [
-      "Show me how cross-platform skills work",
-      "Help me create skills for multiple agents"
+      "Help me create cross-platform skills",
+      "Show me how to structure skills for multiple agents"
     ],
-    "websiteURL": "https://github.com/example/cross-agent-skills",
-    "privacyPolicyURL": "https://github.com/example/cross-agent-skills/blob/main/PRIVACY.md",
-    "termsOfServiceURL": "https://github.com/example/cross-agent-skills/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/goodmangll/cross-agent-skills",
+    "privacyPolicyURL": "https://github.com/goodmangll/cross-agent-skills/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/goodmangll/cross-agent-skills/blob/main/TERMS.md",
     "brandColor": "#3B82F6",
     "composerIcon": "./assets/icon.svg",
     "logo": "./assets/logo.png",

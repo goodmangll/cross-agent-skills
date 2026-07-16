@@ -9,6 +9,9 @@
   },
   "homepage": "https://github.com/goodmangll/cross-agent-skills",
   "repository": "https://github.com/goodmangll/cross-agent-skills",
+  "bugs": {
+    "url": "https://github.com/goodmangll/cross-agent-skills/issues"
+  },
   "license": "MIT",
   "keywords": [
     "skills",
@@ -16,13 +19,23 @@
     "multi-agent",
     "pi",
     "claude",
-    "codex"
+    "codex",
+    "ai-tools",
+    "coding-agent"
   ],
   "skills": "../../skills/",
   "category": "Developer Tools",
   "capabilities": [
     "Interactive",
     "Read",
-    "Write"
-  ]
+    "Write",
+    "Search"
+  ],
+  "defaultPrompt": [
+    "Help me create cross-platform skills",
+    "Show me how to structure skills for multiple agents"
+  ],
+  "brandColor": "#3B82F6",
+  "icon": "./assets/icon.svg",
+  "logo": "./assets/logo.png"
 }
