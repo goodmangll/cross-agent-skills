@@ -4,7 +4,8 @@ import { fileURLToPath } from "node:url";
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
 const extensionDir = dirname(fileURLToPath(import.meta.url));
-const packageRoot = resolve(extensionDir, "../..");
+// adapters/pi/extensions -> go up 3 levels to reach repo root
+const packageRoot = resolve(extensionDir, "../../../..");
 const skillsDir = resolve(packageRoot, "skills");
 
 export default function crossAgentSkillsPiAdapter(pi: ExtensionAPI) {
