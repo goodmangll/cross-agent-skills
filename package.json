@@ -1,17 +1,12 @@
 {
   "name": "cross-agent-skills",
   "version": "1.1.0",
-  "description": "Cross-platform skills that work across multiple AI coding agents (Pi, Claude Code, Codex, Cursor)",
+  "description": "Guidance and templates for portable AI agent skill repositories",
   "keywords": [
     "pi-package",
-    "claude-plugin",
-    "codex-plugin",
-    "cursor-plugin",
-    "cross-platform",
-    "skills",
-    "multi-agent",
-    "ai-tools",
-    "coding-agent"
+    "agent-skills",
+    "claude-code-plugin",
+    "codex-plugin"
   ],
   "author": "goodmangll",
   "license": "MIT",
@@ -24,25 +19,15 @@
     "url": "https://github.com/goodmangll/cross-agent-skills/issues"
   },
   "pi": {
-    "extensions": [
-      "adapters/pi/extensions"
-    ],
     "skills": [
       "skills"
     ]
   },
   "scripts": {
     "test": "./scripts/run-tests.sh",
-    "test:pi": "./scripts/run-tests.sh --pi",
-    "test:claude": "./scripts/run-tests.sh --claude",
-    "test:codex": "./scripts/run-tests.sh --codex",
-    "test:cursor": "./scripts/run-tests.sh --cursor",
-    "test:cross": "./scripts/run-tests.sh --cross",
+    "validate": "npm test",
     "version:check": "./scripts/bump-version.sh --check",
-    "version:audit": "./scripts/bump-version.sh --audit",
-    "skill:update": "./scripts/update-skill.sh",
-    "lint": "echo \"No lint configured\" && exit 0",
-    "validate": "npm test && npm run lint"
+    "version:audit": "./scripts/bump-version.sh --audit"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -1,391 +1,115 @@
 ---
 name: cross-agent-skills
-description: Use when creating skill repositories that work across multiple AI coding agents (Pi, Claude Code, Codex, Cursor, etc.)
+description: Use when creating or distributing a reusable skill repository for more than one AI coding agent platform.
 ---
 
 # Cross-Agent Skills
 
-## Overview
+Keep the skill content portable. Add a platform integration only after its discovery path and installation flow have been verified.
 
-**Build skill repositories that work across any AI coding agent.** Separate platform-agnostic skills from platform-specific adapters, then package for multi-platform distribution.
+## Core Model
 
-**Core principle:** Skills are methodology; adapters are integration. Keep them separate.
-
-## When to Use
-
-- Creating reusable skill libraries for multiple AI agents
-- Adapting existing skills to work on new platforms
-- Building skill marketplaces or package repositories
-- Standardizing skill formats across different agent ecosystems
-
-**When NOT to use:**
-- Single-platform skills (use platform-native format)
-- One-off project-specific conventions (use AGENTS.md/CLAUDE.md)
-- Mechanical constraints (automate, don't document)
-
-## Architecture: Three-Layer Separation
-
-```
-1. Skills Layer (platform-agnostic)
-   ├── SKILL.md files
-   ├── Methodologies & patterns
-   └── Reusable techniques
-
-2. Adapter Layer (platform-specific)
-   ├── Pi: .pi/extensions/adapter.ts
-   ├── Claude Code: .claude-plugin/plugin.json
-   ├── Codex: .codex-plugin/plugin.json
-   └── Cursor: .cursor-plugin/config.json
-
-3. Packaging Layer
-   ├── package.json (npm config)
-   ├── Installation guides
-   └── Version management
+```text
+skills/<name>/SKILL.md     # Canonical, platform-neutral skill content
+platform manifest(s)       # Optional, platform-specific distribution metadata
+README + tests             # Supported platform matrix and verification evidence
 ```
 
-## Quick Start
+A portable skill is not automatically an installable plugin on every platform. Do not claim a platform is supported until the repository has its required manifest and a verified installation path.
 
-**Fastest way to create a cross-platform skill repository:**
+## Repository Layout
 
-```bash
-# Clone this repository
-git clone https://github.com/goodmangll/cross-agent-skills.git
-cd cross-agent-skills
-
-# Initialize new repository
-./templates/init-repo.sh my-new-skills "My cross-platform skills"
-
-# Follow the instructions output by the script
+```text
+repo/
+├── skills/
+│   └── skill-name/
+│       ├── SKILL.md
+│       └── scripts/ or references/       # Optional
+├── .claude-plugin/
+│   ├── plugin.json                       # Claude Code plugin metadata
+│   └── marketplace.json                  # Required for marketplace distribution
+├── .codex-plugin/
+│   └── plugin.json                       # Codex plugin metadata
+├── package.json                          # Pi package metadata, when supporting Pi
+├── README.md
+└── tests/
 ```
 
-**Or manually:**
+Create only the files for platforms verified by the repository. Do not create placeholder manifests for unsupported platforms.
 
-1. Create directory structure
-2. Copy templates from `templates/` directory
-3. Customize for your needs
+## Portable Skill Content
 
-## Quick Reference
-
-| Component | Location | Purpose |
-|-----------|----------|---------|
-| Skills | `skills/*/SKILL.md` | Platform-agnostic instructions |
-| Templates | `templates/` | Ready-to-use scripts and configs |
-| Pi adapter | `.pi/extensions/*.ts` | Pi extension API integration |
-| Claude adapter | `.claude-plugin/plugin.json` | Claude plugin marketplace |
-| Codex adapter | `.codex-plugin/plugin.json` | Codex plugin system |
-| Package config | `package.json` | npm distribution |
-
-## Implementation
-
-### 1. Create Platform-Agnostic Skills
-
-Follow Agent Skills standard ([agentskills.io](https://agentskills.io)):
+Use the Agent Skills standard:
 
 ```markdown
 ---
 name: skill-name
-description: Use when [specific triggering conditions]
+description: Use when [specific user intent or condition]
 ---
 
 # Skill Name
 
-## Overview
-Core principle (1-2 sentences)
+## When To Use
 
-## When to Use
-Symptoms and use cases
+## Workflow
 
-## Core Pattern
-Code examples or flowcharts
-
-## Quick Reference
-Tables or lists
-
-## Implementation
-Step-by-step guide
-
-## Common Mistakes
-Errors and fixes
+## Verification
 ```
 
-### 2. Create Platform Adapters
+Keep the core skill independent of a platform's plugin commands, manifest paths, or UI. Describe work in terms of outcomes, such as reading files, running commands, or writing output. The current agent's own tool environment determines the concrete tool names.
 
-#### Pi Adapter Template
+Platform names may appear when this skill teaches distribution. That is documentation, not platform-specific implementation.
 
-```typescript
-// .pi/extensions/adapter.ts
-import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+## Platform Support
 
-export default function skillAdapter(pi: ExtensionAPI) {
-  // Register skill directory
-  pi.on("resources_discover", async () => ({
-    skillPaths: ["/path/to/skills"]
-  }));
+| Platform | Required files | Installation evidence |
+|---|---|---|
+| Pi | `package.json` with `pi.skills` | `pi install <source>` then confirm the skill is discovered |
+| Claude Code | `.claude-plugin/plugin.json`; add `marketplace.json` for Git distribution | Add marketplace, install named plugin, start a new session |
+| Codex | `.codex-plugin/plugin.json` | Install through a configured marketplace or plugin browser, start a new session |
+| Cursor | Add only after verifying current official plugin format and installation flow | Record the official source and end-to-end test in the README |
 
-  // Optional: Inject bootstrap message
-  pi.on("context", async (event) => {
-    // Add skill usage guidance
-  });
-}
+For a pure Pi skill package, `pi.skills: ["skills"]` is enough. Add a Pi extension only when the package needs Pi-only runtime behavior such as a command, tool, hook, or lifecycle event.
+
+### Claude Code Marketplace
+
+A repository that distributes a Claude Code plugin from GitHub needs both files:
+
+```text
+.claude-plugin/plugin.json
+.claude-plugin/marketplace.json
 ```
 
-#### Claude Code Adapter Template
-
-```json
-// .claude-plugin/plugin.json
-{
-  "name": "your-skills",
-  "description": "Cross-platform skills collection",
-  "version": "1.0.0",
-  "skills": "./skills/"
-}
-```
-
-#### Codex Adapter Template
-
-```json
-// .codex-plugin/plugin.json
-{
-  "name": "your-skills",
-  "version": "1.0.0",
-  "description": "Cross-platform skills",
-  "skills": "./skills/",
-  "interface": {
-    "displayName": "Your Skills",
-    "category": "Developer Tools"
-  }
-}
-```
-
-### 3. Package Structure
-
-```
-your-skills-repo/
-├── skills/                    # Platform-agnostic skills
-│   ├── skill-a/
-│   │   └── SKILL.md
-│   └── skill-b/
-│       └── SKILL.md
-├── adapters/                  # Platform adapters
-│   ├── pi/
-│   │   └── extensions/
-│   │       └── adapter.ts
-│   ├── claude/
-│   │   └── plugin.json
-│   └── codex/
-│       └── plugin.json
-├── package.json               # npm config
-├── README.md                  # Installation guide
-└── tests/                     # Cross-platform tests
-```
-
-### 4. Package.json Configuration
-
-```json
-{
-  "name": "cross-agent-skills",
-  "keywords": ["pi-package", "claude-plugin", "codex-plugin"],
-  "version": "1.0.0",
-  "pi": {
-    "extensions": ["adapters/pi/extensions"],
-    "skills": ["skills"]
-  },
-  "claude": {
-    "plugin": "adapters/claude/plugin.json"
-  },
-  "codex": {
-    "plugin": "adapters/codex/plugin.json"
-  }
-}
-```
-
-## Tool Mapping
-
-Different platforms use different tool names:
-
-| Action | Pi | Claude Code | Codex |
-|--------|----|-------------|-------|
-| Read file | `read` | `Read` | `read_file` |
-| Write file | `write` | `Write` | `write_file` |
-| Edit file | `edit` | `Edit` | `edit_file` |
-| Run command | `bash` | `Bash` | `execute_command` |
-| Search files | `grep` | `Grep` | `search_files` |
-
-**Solution:** Create mapping layer in adapters:
-
-```typescript
-const toolMapping = {
-  pi: { read: 'read', write: 'write', execute: 'bash' },
-  claude: { read: 'Read', write: 'Write', execute: 'Bash' },
-  codex: { read: 'read_file', write: 'write_file', execute: 'execute_command' }
-};
-```
-
-## Installation Guides
-
-### For Users
+`marketplace.json` must point to the repository's plugin root. Users can then run:
 
 ```bash
-# Pi
-pi install git:github.com/your-org/your-skills
-
-# Claude Code
-/plugin install your-skills@your-marketplace
-
-# Codex
-/plugins install your-skills
-
-# Cursor
-/add-plugin your-skills
+claude plugin marketplace add owner/repository
+claude plugin install plugin-name@marketplace-name
 ```
 
-### For Developers
+Do not document invented `@github:` installation syntax.
 
-```bash
-# Clone repository
-git clone https://github.com/your-org/your-skills.git
+### Codex
 
-# Install dependencies
-npm install
+Place the plugin manifest at `.codex-plugin/plugin.json`, not an arbitrary adapter directory. Document only the marketplace or plugin-browser flow actually tested against the current Codex version.
 
-# Test on Pi
-pi -e /path/to/your-skills
+## Verification
 
-# Test on Claude Code
-# Use Claude's plugin development mode
-```
+Use three layers:
 
-## Testing Cross-Platform Compatibility
+1. **Structure checks:** every skill has valid frontmatter; required manifests exist at the platform's discovery path; manifest JSON parses; referenced files exist.
+2. **Package checks:** run the platform's package validation where available and inspect `npm pack --dry-run` when publishing npm packages.
+3. **End-to-end checks:** install from the intended source in a clean environment, start a new session, and verify the skill is discovered or auto-triggers as expected.
 
-### 1. Skill Behavior Tests
-
-Verify skills work the same across platforms:
-
-```javascript
-// tests/cross-platform-test.js
-const platforms = ['pi', 'claude', 'codex'];
-
-async function testSkill(skillName, platform) {
-  // Load skill
-  // Simulate platform environment
-  // Verify behavior matches
-  // Check tool mappings work
-}
-```
-
-### 2. Adapter Integration Tests
-
-Test each adapter separately:
-
-```bash
-# Test Pi adapter
-pi -e ./adapters/pi
-
-# Test Claude adapter
-# Use Claude's plugin testing framework
-
-# Test Codex adapter
-# Use Codex's plugin testing tools
-```
-
-### 3. Package Installation Tests
-
-Verify installation works on each platform:
-
-```bash
-# Test npm installation
-npm pack
-pi install ./your-skills-1.0.0.tgz
-
-# Test git installation
-pi install git:github.com/your-org/your-skills
-```
-
-## Common Pitfalls
-
-### 1. Platform-Specific Code in Skills
-
-**Problem:** Skills contain platform-specific tool calls.
-
-**Solution:** Use abstract tool names in skills, map in adapters.
-
-### 2. Inconsistent Skill Discovery
-
-**Problem:** Different platforms load skills differently.
-
-**Solution:** Follow standard directory structure, test discovery on each platform.
-
-### 3. Missing Tool Mappings
-
-**Problem:** Skills reference tools that don't exist on some platforms.
-
-**Solution:** Create comprehensive tool mapping, handle missing tools gracefully.
-
-### 4. Version Mismatch
-
-**Problem:** Different platforms expect different package formats.
-
-**Solution:** Use semantic versioning, test installation on all target platforms.
-
-## Real-World Example: Superpowers
-
-Superpowers implements this pattern successfully:
-
-```bash
-# Same skills work on:
-pi install git:github.com/obra/superpowers      # Pi
-/plugin install superpowers@claude-plugins      # Claude Code
-/plugins install superpowers                     # Codex
-/add-plugin superpowers                          # Cursor
-```
-
-**Key success factors:**
-1. Platform-agnostic skill content
-2. Separate adapter files for each platform
-3. Comprehensive tool mapping
-4. Multi-platform installation guides
-5. Cross-platform testing
-
-## Quick Start Checklist
-
-- [ ] Create `skills/` directory with SKILL.md files
-- [ ] Create adapter for Pi (`.pi/extensions/adapter.ts`)
-- [ ] Create adapter for Claude Code (`.claude-plugin/plugin.json`)
-- [ ] Create adapter for Codex (`.codex-plugin/plugin.json`)
-- [ ] Add `package.json` with multi-platform keywords
-- [ ] Write installation guide for each platform
-- [ ] Test skills on each target platform
-- [ ] Create cross-platform tests
+A test that only proves an arbitrary JSON file exists does not verify a platform integration. Record the tested platform version, command, date, and result in the README support matrix.
 
 ## Common Mistakes
 
-### ❌ Mixing Platform-Specific Code
-Putting Pi API calls in SKILL.md files.
-
-### ❌ Single Platform Focus
-Only creating Pi adapter when building for multiple platforms.
-
-### ❌ Missing Tool Mappings
-Not handling different tool names across platforms.
-
-### ❌ No Installation Guide
-Forgetting to document how to install on each platform.
-
-### ❌ Skipping Cross-Platform Testing
-Assuming skills work everywhere without testing.
-
-## Next Steps
-
-1. **Start with one skill** - Create a simple skill, then add adapters
-2. **Test early** - Verify on each platform before adding more skills
-3. **Document patterns** - Record what works across platforms
-4. **Build incrementally** - Add platforms one at a time
-5. **Share learnings** - Contribute back to cross-platform skill community
-
-## References
-
-- [Agent Skills Standard](https://agentskills.io)
-- [Superpowers Repository](https://github.com/obra/superpowers)
-- [Pi Documentation](https://pi.dev)
-- [Claude Code Plugins](https://claude.com/plugins)
-- [Codex Plugins](https://github.com/openai/plugins)
+| Mistake | Correction |
+|---|---|
+| Putting manifests under `adapters/` | Use the platform's documented root directory. |
+| Copying one platform's JSON schema to another | Verify each platform independently. |
+| Adding a generic tool-name mapping | Keep core skill language outcome-oriented; adapters cannot rename a host's built-in tools. |
+| Calling every platform supported | Mark unverified platforms as unsupported or experimental. |
+| Checking only JSON syntax | Also validate paths, package contents, and an actual install. |
+| Adding a Pi extension for a static skill | Use `pi.skills` alone unless Pi-only runtime behavior is necessary. |
